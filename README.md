@@ -1,1 +1,1 @@
-# axa-fr-doctocr
+# axa-fr-ocr
