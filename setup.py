@@ -5,7 +5,7 @@ with open("requirements.txt") as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
-    name="ocr",
+    name="axa-fr-ocr",
     version=version.VERSION,
     packages=["ocr", "ocr.text"],
     package_dir={"": "src"},
