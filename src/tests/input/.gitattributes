@@ -1,0 +1,4 @@
+specimen.png !filter !diff !merge image
+small_image_test.png !filter !diff !merge image
+specimen_cni.png !filter !diff !merge image
+specimen_180.png !filter !diff !merge image

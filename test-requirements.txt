@@ -1,0 +1,5 @@
+filetype==1.0.7
+Werkzeug==1.0.1
+pathos==0.2.8
+Pillow==9.1.0
+opencv-python-headless==4.7.0.68
