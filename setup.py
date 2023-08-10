@@ -7,9 +7,9 @@ with open("requirements.txt") as f:
 setuptools.setup(
     name="axa-fr-ocr",
     version=version.VERSION,
-    packages=["ocr", "ocr.text"],
+    packages=["axa_fr_ocr", "axa_fr_ocr.text"],
     package_dir={"": "src"},
-    package_data={"ocr.text": ["*"]},
+    package_data={"axa_fr_ocr.text": ["*"]},
     install_requires=requirements,
     author="AXA",
     author_email="guillaume.chervet@axa.fr",
