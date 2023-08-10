@@ -33,11 +33,11 @@ import cv2
 import numpy as np
 import logging
 
-from axa-fr-ocr.ocr import Ocr
-from axa-fr-ocr.image import normalize_size
-from axa-fr-ocr.text.deskew import deskew
-from axa-fr-ocr.text.orientation import orientate
-from axa-fr-ocr.text.text import is_image_contain_text
+from axa_fr_ocr.ocr import Ocr
+from axa_fr_ocr.image import normalize_size
+from axa_fr_ocr.text.deskew import deskew
+from axa_fr_ocr.text.orientation import orientate
+from axa_fr_ocr.text.text import is_image_contain_text
 
 
 with open('.path.pdf', 'w') as stream:
