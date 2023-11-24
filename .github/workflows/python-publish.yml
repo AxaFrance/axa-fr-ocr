@@ -18,7 +18,7 @@ jobs:
   unit_tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -37,35 +37,39 @@ jobs:
     outputs:
       new_version: ${{ steps.tag.outputs.new_version }}
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Bump version and push tag
         id: tag_version
-        if: github.ref == 'refs/heads/main'
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: mathieudutour/github-tag-action@v6.1
         with:
+          release_branches: main
           github_token: ${{ secrets.GITHUB_TOKEN  }}
       - name: Add tag to output step
         id: tag
-        if: github.ref == 'refs/heads/main'
-        run: echo "::set-output name=new_version::${{ steps.tag_version.outputs.new_version }}"
+        run: |
+          if [ ${{ github.ref }} ==  'refs/heads/main' ]; then
+            echo "new_version=${{ steps.tag_version.outputs.new_version }}" >> $GITHUB_OUTPUT
+          else
+            echo "new_version=${{ steps.tag_version.outputs.new_version }}-dev" >> $GITHUB_OUTPUT
+          fi
+
   deploy:
     runs-on: ubuntu-latest
     needs: tags
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.8'
     - name: Install dependencies
       run: |
-        echo 'VERSION = "${{ needs.tags.outputs.new_version }}"' >| version.py
+        echo "VERSION = '${{ needs.tags.outputs.new_version }}'" >| version.py
         python -m pip install --upgrade pip
         python -m pip install --upgrade setuptools wheel
     - name: Build package
       run: python setup.py sdist bdist_wheel
     - name: Publish package
-      if: github.ref == 'refs/heads/main'
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
         user: __token__
