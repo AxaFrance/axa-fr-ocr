@@ -1,12 +1,14 @@
 import setuptools
-import version
+from version import VERSION
+
+print(f"version =============== {VERSION}")
 
 with open("requirements.txt") as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
     name="axa-fr-ocr",
-    version=version.VERSION,
+    version=VERSION,
     packages=["axa_fr_ocr", "axa_fr_ocr.text"],
     package_dir={"": "src"},
     package_data={"axa_fr_ocr.text": ["*"]},
